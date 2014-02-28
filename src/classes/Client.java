@@ -1,7 +1,5 @@
 package classes;
 
-import javax.security.auth.login.AccountException;
-
 import exceptions.AccountsFullException;
 
 public class Client {
@@ -9,16 +7,16 @@ public class Client {
 	private int id;
 	private String name;
 	private float balance;
-	private Account[] accounts = new Account[5];
+	private Account[] accounts;
 	private float commition_rate = 0;
 	private float interest_rate = 0;
 
 	// Constructors
 	public Client(int id, String name, float balance) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.balance = balance;
+		accounts = new Account[5];
 	}
 
 	// Getters/setters
@@ -57,8 +55,8 @@ public class Client {
 				break;
 			}
 		}
-		if (!successful){
-			//TODO - log failure;
+		if (!successful) {
+			// TODO - log failure;
 		}
 
 	}
@@ -87,12 +85,31 @@ public class Client {
 
 	public void deposit(float amount) {
 		balance += amount * (1 - commition_rate);
-		//TODO - log
+		// TODO - log
 	}
 
 	public void withdraw(float amount) {
 		balance -= amount * (1 + commition_rate);
-		//TODO - log
+		// TODO - log
+	}
+
+	public void autoUpdateAccounts() {
+		for (Account acc : accounts) {
+			if (acc != null) {
+				acc.setBalance(acc.getBalance() * (interest_rate + 1));
+				//TODO - log this
+			}
+		}
+	}
+	
+	public float getFortune(){
+		float sum = balance;
+		for (Account acc:accounts){
+			if (acc != null){
+				sum += acc.getBalance();
+			}
+		}
+		return sum;
 	}
 
 }
