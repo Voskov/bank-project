@@ -2,14 +2,14 @@ package classes;
 
 import exceptions.AccountsFullException;
 
-public class Client {
+public abstract class Client{
 	// attributes
 	private int id;
 	private String name;
 	private float balance;
 	private Account[] accounts;
-	private float commition_rate = 0;
-	private float interest_rate = 0;
+	protected float commition_rate = 0;
+	protected float interest_rate = 0;
 
 	// Constructors
 	public Client(int id, String name, float balance) {
@@ -65,12 +65,10 @@ public class Client {
 		return accounts[index];
 	}
 
-	public void removeAccount(int id) {
+	public void removeAccount(Account accountRemove) {
 		boolean success = false;
 		for (int i = 0; i < accounts.length; i++) {
-			if (accounts[i].getId() == id) {
-				// this.setBalance(this.getBalance() +
-				// accounts[i].getBalance());
+			if (accounts[i] != null && accounts[i].equals(accountRemove)) {
 				balance += accounts[i].getBalance();
 				accounts[i] = null;
 				success = true;
@@ -111,5 +109,12 @@ public class Client {
 		}
 		return sum;
 	}
-
+	
+	public boolean equals(Client otherClient){
+		return (id == otherClient.id) ? true : false;
+	}
+	
+	public String toString(){
+		return "ID - ";
+	};
 }

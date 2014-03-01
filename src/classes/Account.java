@@ -24,4 +24,8 @@ public class Account {
 	public void setBalance(float balance) {
 		this.balance = balance;
 	}
+	
+	public boolean equals(Account otherAccount){
+		return (id == otherAccount.id);	//doesn't need more than this
+	}
 }

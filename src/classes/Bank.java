@@ -50,10 +50,10 @@ public class Bank {
 		}
 	}
 
-	public void removeClient(int client_id) {
+	public void removeClient(Client client) {
 		boolean success = false;
 		for (Client cl : clients) {
-			if (cl != null && cl.getId() == client_id) {
+			if (cl != null && cl.equals(client)) {
 				balance -= cl.getFortune();
 				cl = null;
 				// TODO - log this operation
