@@ -10,14 +10,24 @@ public class Bank {
 	private float balance;
 	private Client[] clients;
 	private Logger logService;
+	private Bank bank;
 
 	// private void account_apdater; //TODO
 
 	// Constructors
-	public Bank() {
+
+	private Bank() {
 		logService = new Logger("A"); // TODO - do something with the drivers
 										// name
 		clients = new Client[100];
+	}
+	
+	public Bank getBank(){
+		if (bank != null) return bank;
+		else {
+			bank = new Bank();
+			return bank;
+		}
 	}
 
 	// Methods
