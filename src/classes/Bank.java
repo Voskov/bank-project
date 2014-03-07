@@ -90,4 +90,10 @@ public class Bank {
 	public void startAccountUpdater() {
 		// TODO - do later
 	}
+	
+	public void printClientList(){
+		for (Client client:clients){
+			if (client != null) System.out.println(client.toString());
+		}
+	}
 }
