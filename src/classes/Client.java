@@ -3,6 +3,7 @@ package classes;
 import java.util.Date;
 
 import exceptions.AccountsFullException;
+import exceptions.WithdrawException;
 
 public abstract class Client{
 	// attributes
@@ -88,7 +89,10 @@ public abstract class Client{
 		// TODO - log
 	}
 
-	public void withdraw(float amount) {
+	public void withdraw(float amount) throws WithdrawException {
+		if (amount > balance){
+			throw new WithdrawException("Not enough money", id, balance, amount);
+		}
 		balance -= amount * (1 + commition_rate);
 		// TODO - log
 	}
