@@ -99,7 +99,7 @@ public abstract class Client{
 				float interest = acc.getBalance() * (interest_rate);
 				acc.setBalance(acc.getBalance() + interest);
 				Log log = new Log(new Date().getTime(), acc.getId(), "Accout " + acc.getId() + " was updated with " + interest, interest, "Account");
-				log.print_details();
+				Logger.log(log);
 			}
 		}
 	}

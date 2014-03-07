@@ -10,7 +10,7 @@ public class Logger {
 	}
 	
 	//MTDS
-	public void log(Log log) {
+	public static void log(Log log) {
 		log.print_details();
 	}
 	

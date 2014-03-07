@@ -2,7 +2,7 @@ package classes;
 
 import java.util.Date;
 
-import exceptions.ClientAddFailure;
+import exceptions.ClientError;
 
 public class Bank {
 
@@ -46,7 +46,7 @@ public class Bank {
 		balance = newBal;
 	}
 
-	public void addClient(Client newClient) {
+	public void addClient(Client newClient)  throws ClientError{
 		boolean success = false;
 		for (int i = 0; i < clients.length; i++) {
 			if (clients[i] == null) {
@@ -54,17 +54,17 @@ public class Bank {
 				balance += newClient.getFortune();
 				success = true;
 				Log log = new Log(new Date().getTime(), clients[i].getId(), "A new client added", newClient.getFortune(), "Client");
-				log.print_details();
+				Logger.log(log);
 				break;
 			}
 		}
 		if (success == false) {
-			throw new ClientAddFailure();
-			// TODO - log this failure
+			Log log = new Log(new Date().getTime(), newClient.getId(), "The Client " + newClient.getId() + " was not added", "Client");
+			throw new ClientError();
 		}
 	}
 
-	public void removeClient(Client client) {
+	public void removeClient(Client client) throws ClientError {
 		boolean success = false;
 		for (Client cl : clients) {
 			if (cl != null && cl.equals(client)) {
@@ -75,7 +75,7 @@ public class Bank {
 			}
 		}
 		if (success == false) {
-			// TODO - log this failure
+			throw new ClientError();
 		}
 	}
 
@@ -93,7 +93,8 @@ public class Bank {
 	
 	public void printClientList(){
 		for (Client client:clients){
-			if (client != null) System.out.println(client.toString());
+			if (client != null)
+				System.out.println(client.toString());
 		}
 	}
 }
