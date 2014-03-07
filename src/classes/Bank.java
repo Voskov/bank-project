@@ -2,6 +2,8 @@ package classes;
 
 import java.util.Date;
 
+import exceptions.ClientAddFailure;
+
 public class Bank {
 
 	// Attributes
@@ -13,7 +15,8 @@ public class Bank {
 
 	// Constructors
 	public Bank() {
-		logService = new Logger("A"); // TODO - do something with the drivers name
+		logService = new Logger("A"); // TODO - do something with the drivers
+										// name
 		clients = new Client[100];
 	}
 
@@ -35,17 +38,18 @@ public class Bank {
 
 	public void addClient(Client newClient) {
 		boolean success = false;
-		for (Client cl : clients) {
-			if (cl == null) {
-				cl = newClient;
-				balance += cl.getFortune();
+		for (int i = 0; i < clients.length; i++) {
+			if (clients[i] == null) {
+				clients[i] = newClient;
+				balance += newClient.getFortune();
 				success = true;
-				Log log = new Log(((new Date()).getTime()), newClient.getId(), "Clentt added - " + newClient.getId(), newClient.getFortune());
-				// TODO - log this operation
+				Log log = new Log(new Date().getTime(), clients[i].getId(), "A new client added", newClient.getFortune(), "Client");
+				log.print_details();
 				break;
 			}
 		}
 		if (success == false) {
+			throw new ClientAddFailure();
 			// TODO - log this failure
 		}
 	}

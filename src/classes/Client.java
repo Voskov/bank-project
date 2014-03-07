@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.Date;
+
 import exceptions.AccountsFullException;
 
 public abstract class Client{
@@ -94,8 +96,10 @@ public abstract class Client{
 	public void autoUpdateAccounts() {
 		for (Account acc : accounts) {
 			if (acc != null) {
-				acc.setBalance(acc.getBalance() * (interest_rate + 1));
-				//TODO - log this
+				float interest = acc.getBalance() * (interest_rate);
+				acc.setBalance(acc.getBalance() + interest);
+				Log log = new Log(new Date().getTime(), acc.getId(), "Accout " + acc.getId() + " was updated with " + interest, interest, "Account");
+				log.print_details();
 			}
 		}
 	}
