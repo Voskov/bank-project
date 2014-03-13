@@ -1,5 +1,6 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import exceptions.ClientError;
@@ -8,22 +9,24 @@ public class Bank {
 
 	// Attributes
 	private float balance;
-	private Client[] clients;
+	// private Client[] clients;
+	private ArrayList<Client> clients;
 	private Logger logService;
 	private Bank bank;
 
 	// private void account_apdater; //TODO
 
-	// Constructors
-
+	// CTOR
 	private Bank() {
 		logService = new Logger("A"); // TODO - do something with the drivers
 										// name
-		clients = new Client[100];
+		clients = new ArrayList<>();
+
 	}
-	
-	public Bank getBank(){
-		if (bank != null) return bank;
+
+	public Bank getBank() {
+		if (bank != null)
+			return bank;
 		else {
 			bank = new Bank();
 			return bank;
@@ -46,20 +49,14 @@ public class Bank {
 		balance = newBal;
 	}
 
-	public void addClient(Client newClient)  throws ClientError{
+	public void addClient(Client newClient) throws ClientError {
 		boolean success = false;
-		for (int i = 0; i < clients.length; i++) {
-			if (clients[i] == null) {
-				clients[i] = newClient;
-				balance += newClient.getFortune();
-				success = true;
-				Log log = new Log(new Date().getTime(), clients[i].getId(), "A new client added", newClient.getFortune(), "Client");
-				Logger.log(log);
-				break;
-			}
-		}
+		clients.add(newClient);
+		success = true;
 		if (success == false) {
-			Log log = new Log(new Date().getTime(), newClient.getId(), "The Client " + newClient.getId() + " was not added", "Client");
+			Log log = new Log(new Date().getTime(), newClient.getId(),
+					"The Client " + newClient.getId() + " was not added",
+					"Client");
 			throw new ClientError();
 		}
 	}
@@ -90,9 +87,9 @@ public class Bank {
 	public void startAccountUpdater() {
 		// TODO - do later
 	}
-	
-	public void printClientList(){
-		for (Client client:clients){
+
+	public void printClientList() {
+		for (Client client : clients) {
 			if (client != null)
 				System.out.println(client.toString());
 		}
