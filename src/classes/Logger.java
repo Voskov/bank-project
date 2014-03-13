@@ -1,6 +1,9 @@
 package classes;
 
+import java.util.ArrayList;
+
 public class Logger {
+	private ArrayList<Log> logs;
 	//ATTR
 	private String driverName;
 
@@ -14,8 +17,7 @@ public class Logger {
 		log.print_details();
 	}
 	
-	public Log[] getLogs() {
-		//TODO - do later
-		return null;
+	public ArrayList<Log> getLogs() {
+		return logs;
 	}
 }

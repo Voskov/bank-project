@@ -50,33 +50,24 @@ public class Bank {
 	}
 
 	public void addClient(Client newClient) throws ClientError {
-		boolean success = false;
-		clients.add(newClient);
-		success = true;
-		if (success == false) {
-			Log log = new Log(new Date().getTime(), newClient.getId(),
-					"The Client " + newClient.getId() + " was not added",
-					"Client");
-			throw new ClientError();
+		try {
+			clients.add(newClient);
+		} catch (RuntimeException e) {
+			System.out.println("Could not add a new client");
+			System.out.println(e.getMessage());
 		}
 	}
 
 	public void removeClient(Client client) throws ClientError {
-		boolean success = false;
-		for (Client cl : clients) {
-			if (cl != null && cl.equals(client)) {
-				balance -= cl.getFortune();
-				cl = null;
-				// TODO - log this operation
-				break;
-			}
-		}
-		if (success == false) {
-			throw new ClientError();
+		try{
+			clients.remove(client);
+		} catch (RuntimeException e){
+			System.out.println("Could not remove client " + client.getId());
+			System.out.println(e.getMessage());
 		}
 	}
 
-	public Client[] getClients() {
+	public ArrayList<Client> getClients() {
 		return clients;
 	}
 
