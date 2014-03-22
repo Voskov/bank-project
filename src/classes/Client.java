@@ -21,7 +21,7 @@ public abstract class Client {
 		this.id = id;
 		this.name = name;
 		this.balance = balance;
-		accounts = new ArrayList<>();
+		accounts = new ArrayList<Account>();
 	}
 
 	// Getters/setters

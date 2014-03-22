@@ -20,7 +20,7 @@ public class Bank {
 	private Bank() {
 		logService = new Logger("A"); // TODO - do something with the drivers
 										// name
-		clients = new ArrayList<>();
+		clients = new ArrayList<Client>();
 
 	}
 
